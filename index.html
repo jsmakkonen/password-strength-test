@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html class="no-js" ng-app="PasswordStrength">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Password Strength Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="form-container">
+
+            <form action="" method="POST" name="registerForm" role="form" ng-controller="FormController">
+                <legend class="form-label">Sign Up</legend>
+
+                <div class="form-group">
+                    <label for="fullname">Fullname</label>
+
+                    <div class="error form-hint" ng-show="registerForm.fullname.$dirty && registerForm.fullname.$error.required" ng-cloak>{{"This field is required."}}</div>
+
+                    <input type="text" class="form-control" ng-class="(registerForm.fullname.$dirty && registerForm.fullname.$invalid) ? 'error' : ''" id="fullname" name="fullname" placeholder="Enter Your Fullname" ng-required="true" ng-model="fullname">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <div class="error form-hint" ng-show="registerForm.email.$dirty && registerForm.email.$error.required" ng-cloak>{{"This field is required."}}</div>
+
+                    <div class="error form-hint" ng-show="registerForm.email.$dirty && registerForm.email.$error.email" ng-cloak>{{"Email is invalid."}}</div>
+
+                    <input type="email" class="form-control" ng-class="(registerForm.email.$dirty && registerForm.email.$invalid) ? 'error' : ''" id="email" name="email" placeholder="Enter Email Address" ng-required="true" ng-model="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="form-hint">You are required to use a sufficiently strong password. It must be longer than 7 characters.</div>
+
+                    <input type="password" class="form-control ok-password" ng-class="(registerForm.password.$dirty && registerForm.password.$invalid) ? 'error' : ''" id="password" name="password" placeholder="Enter Password" ng-required="true" ng-model="password">
+
+                    <div class="label password-count" ng-class="password.length > 7 ? 'label-success' : 'label-danger'" ng-cloak>{{ password | passwordCount:7 }}</div>
+
+                    <div class="strength-meter">
+                        <div class="strength-meter-fill" data-strength="{{passwordStrength}}"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
